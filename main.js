@@ -17,16 +17,16 @@ class Juego{
     }
 }
 
-const juego01= new Juego("Doom Eternal",5000,11001);
+const juego01= new Juego("Doom Eternal",5000,110001);
 const juego02= new Juego ("FIFA 21",4500,11002);
-const juego03= new Juego("Crash Bandicoot",4000,11003);
-const juego04= new Juego("The Last of Us",6000,11004);
-const juego05= new Juego("Uncharthed 4",2500,11005);
-const juego06= new Juego("GT Sport",1500,101006);
-const juego07= new Juego("God of War",1300,11007);
-const juego08= new Juego("The Order",2100,11008);
-const juego09= new Juego("Horizon Zero Dawn",2300,11009);
-const juego10= new Juego("Cyberpunk 2077",8200,11010);
+const juego03= new Juego("Crash Bandicoot",4000,110003);
+const juego04= new Juego("The Last of Us",6000,110004);
+const juego05= new Juego("Uncharthed 4",2500,110005);
+const juego06= new Juego("GT Sport",1500,1010006);
+const juego07= new Juego("God of War",1300,110007);
+const juego08= new Juego("The Order",2100,110008);
+const juego09= new Juego("Horizon Zero Dawn",2300,110009);
+const juego10= new Juego("Cyberpunk 2077",8200,110010);
 
 
 function juegos(comprar){
@@ -116,21 +116,64 @@ function juegos(comprar){
 
     }
 }
-//pedimos al usuario que ingrese un numero del 1 al 5 para indicar que juego quiere comprar
-let comprar = Number(prompt("Bienvenido que juego desea comprar (seleccion de 1 a 5 con otro valor termina)\n1:"+juego1.nombre+"\n2:"+juego2.nombre+"\n3:"+juego3.nombre+"\n4: "+juego4.nombre+"\n5: "+juego5.nombre+"\n"));
 
+function crearJuego(){
+    let nuevoJuego = prompt("Ingrese el nombre del juego: ");
+    let nuevoPrecio = Number(prompt("Ingrese un precio estimativo que espera del juego: "));
+
+    let nuevoCodigo = Number(prompt("Ingrese un codigo entre 110011 y 110100"));        
+    while (nuevoCodigo<110011||nuevoCodigo>110100){
+        nuevoCodigo=Number(prompt("Ingrese un codigo entre 110011 y 110100"));
+    }
+
+    return new Juego(nuevoJuego,nuevoPrecio,nuevoCodigo);
+}
+
+alert("Bienvenido a Tienda Gamer.");
+//acumulador para las compras
 let acum=0;
-while(comprar>=1&&comprar<=5){
-    juegos(comprar);
+//acumulador para las ventas del usuario
+let acumv=0;
 
-    //le pedimos que ingrese otra vez o que termine
-    comprar = Number(prompt("Bienvenido que juego desea comprar (seleccion de 1 a 5 con otro valor termina)\n1:"+juego1.nombre+"\n2:"+juego2.nombre+"\n3:"+juego3.nombre+"\n4: "+juego4.nombre+"\n5: "+juego5.nombre+"\n"));
+//ponemos toUpperCase para que lo vuelva mayuscula directamente
+let opcion=prompt("Seleccione que opcion desea ejecutar: \nCOMPRAR: para comprar juegos.\nVENDER: para vendernos su juego. \n(con otro valor termina)").toUpperCase();
 
+while(opcion==='COMPRAR'||opcion==='VENDER'){
+    switch(opcion){
+        case 'COMPRAR':
+             compra= Number(prompt("Bienvenido que juego desea comprar (seleccion de 1 a 10 con otro valor termina)\n1:"+juego01.nombre+"\n2:"+juego02.nombre+"\n3:"+juego03.nombre+"\n4: "+juego04.nombre+"\n5: "+juego05.nombre+"\n6: "+juego06.nombre+"\n7: "+juego07.nombre+"\n8: "+juego08.nombre+"\n9: "+juego09.nombre+"\n10: "+juego10.nombre));
+
+            //hacemos una validacion aqui para que no salga hasta que no se ponga un numero entre 1 y 10
+             while(compra<1||compra>10){
+                compra= Number(prompt("Bienvenido que juego desea comprar (seleccion de 1 a 10 con otro valor termina)\n1:"+juego01.nombre+"\n2:"+juego02.nombre+"\n3:"+juego03.nombre+"\n4: "+juego04.nombre+"\n5: "+juego05.nombre+"\n6: "+juego06.nombre+"\n7: "+juego07.nombre+"\n8: "+juego08.nombre+"\n9: "+juego09.nombre+"\n10: "+juego10.nombre));
+             }
+
+            juegos(compra);
+            break;
+        
+        case 'VENDER':
+            venta=crearJuego();
+            console.log("Usted vendio:\n"+venta.toString()+"\n ");
+            acumv+=venta.precio;
+            break;
+        default:
+            break;
+
+    }
+    opcion=prompt("Seleccione que opcion desea ejecutar: \nCOMPRAR: para comprar juegos.\nVENDER: para vendernos su juego. \n(con otro valor termina)").toUpperCase();
 }
 
 if (acum!=0) {
-    console.log("\nTotal a pagar: "+acum+"\nGracias por su compra!");
+    console.log("\nTotal a pagar: $"+acum+"\nGracias por su compra!");
 }
 else{
     console.log("No se registro ninguna compra.");
+}
+
+if (acumv!=0) {
+    console.log("Total a recibir por los juegos: $"+acumv+"\nEn breve no pondremos en contacto");
+    
+}
+else{
+    console.log("No se registro ninguna venta.");
 }
