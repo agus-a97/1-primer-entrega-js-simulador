@@ -167,13 +167,13 @@ if (acum!=0) {
     console.log("\nTotal a pagar: $"+acum+"\nGracias por su compra!");
 }
 else{
-    console.log("No se registro ninguna compra.");
+    console.log("\nNo se registro ninguna compra.");
 }
 
 if (acumv!=0) {
-    console.log("Total a recibir por los juegos: $"+acumv+"\nEn breve no pondremos en contacto");
+    console.log("\nTotal a recibir por los juegos: $"+acumv+"\nEn breve no pondremos en contacto");
     
 }
 else{
-    console.log("No se registro ninguna venta.");
+    console.log("\nNo se registro ninguna venta.");
 }
